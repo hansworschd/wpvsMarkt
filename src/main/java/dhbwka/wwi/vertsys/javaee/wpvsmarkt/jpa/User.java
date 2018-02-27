@@ -28,6 +28,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
@@ -55,6 +56,26 @@ public class User implements Serializable {
     @Column(name = "PASSWORD_HASH", length = 64)
     @NotNull(message = "Das Passwort darf nicht leer sein.")
     private String passwordHash;
+    
+    @Column(name="NAME",length = 64)
+    private String name;
+    
+    @Column(name="STREET",length = 255)
+    private String street;
+    
+    @Column(name="PLZ",length=5)
+    private String plz; //String da PLZ mit 0 beginnen kann, int würde aus 01234 die PLZ 1234 machen
+    
+    @Column(name="PLACE",length=64)
+    private String place;
+    
+    @Column(name="PHONE",length=64)
+    private String phone;
+    
+    @Column(name="MAIL",length=255)
+    @NotNull(message = "Die E-Mail darf nicht leer sein.")
+    @Pattern(regexp = "^\\w+@\\w+\\..{2,3}(.{2,3})?$",message="Die E-Mail ist nicht korrekt.")
+    private String mail;
 
     @ElementCollection
     @CollectionTable(
@@ -65,16 +86,22 @@ public class User implements Serializable {
     List<String> groups = new ArrayList<>();
 
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    List<Task> tasks = new ArrayList<>();
+    List<Article> tasks = new ArrayList<>();
 
     //<editor-fold defaultstate="collapsed" desc="Konstruktoren">
     public User() {
     }
 
-    public User(String username, String password) {
+    public User(String username, String password, String name, String street, String plz, String place, String phone, String mail) {
         this.username = username;
         this.password.password = password;
         this.passwordHash = this.hashPassword(password);
+        this.name = name;
+        this.street = street;
+        this.plz = plz;
+        this.place = place;
+        this.phone = phone;
+        this.mail = mail;
     }
     //</editor-fold>
 
@@ -87,13 +114,63 @@ public class User implements Serializable {
         this.username = id;
     }
 
-    public List<Task> getTasks() {
+    public List<Article> getTasks() {
         return tasks;
     }
 
-    public void setTasks(List<Task> tasks) {
+    public void setTasks(List<Article> tasks) {
         this.tasks = tasks;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getPlz() {
+        return plz;
+    }
+
+    public void setPlz(String plz) {
+        this.plz = plz;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+    
+    
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Passwort setzen und prüfen">
@@ -190,5 +267,4 @@ public class User implements Serializable {
         this.groups.remove(groupname);
     }
     //</editor-fold>
-
 }

@@ -24,11 +24,15 @@
 
     <jsp:attribute name="menu">
         <div class="menuitem">
-            <a href="<c:url value="/app/task/new/"/>">Aufgabe anlegen</a>
+            <a href="<c:url value="/app/article/"/>">Angebot/Anzeige aufgeben</a>
         </div>
 
         <div class="menuitem">
             <a href="<c:url value="/app/categories/"/>">Kategorien bearbeiten</a>
+        </div>
+        
+         <div class="menuitem">
+            <a href="<c:url value="/app/user/edit/"/>">User bearbeiten</a>
         </div>
     </jsp:attribute>
 
@@ -50,9 +54,9 @@
             <select name="search_status">
                 <option value="">Alle Stati</option>
 
-                <c:forEach items="${statuses}" var="status">
-                    <option value="${status}" ${param.search_status == status ? 'selected' : ''}>
-                        <c:out value="${status.label}"/>
+                <c:forEach items="${statuses}" var="artStatus">
+                    <option value="${artStatus}" ${param.search_status == artStatus ? 'selected' : ''}>
+                        <c:out value="${artStatus.label}"/>
                     </option>
                 </c:forEach>
             </select>
@@ -66,7 +70,7 @@
         <c:choose>
             <c:when test="${empty tasks}">
                 <p>
-                    Es wurden keine Aufgaben gefunden. 🐈
+                    Es wurden keine Anzeigen gefunden. 🐈
                 </p>
             </c:when>
             <c:otherwise>
@@ -77,16 +81,18 @@
                         <tr>
                             <th>Bezeichnung</th>
                             <th>Kategorie</th>
-                            <th>Eigentümer</th>
-                            <th>Status</th>
-                            <th>Fällig am</th>
+                            <th>Benutzer</th>
+                            <th>Angebotstyp</th>
+                            <th>Preis</th>
+                            <th>PreisArt</th>
+                            <th>Datum</th>
                         </tr>
                     </thead>
                     <c:forEach items="${tasks}" var="task">
                         <tr>
                             <td>
-                                <a href="<c:url value="/app/task/${task.id}/"/>">
-                                    <c:out value="${task.shortText}"/>
+                                <a href="<c:url value="/app/article/${task.id}/"/>">
+                                    <c:out value="${task.title}"/>
                                 </a>
                             </td>
                             <td>
@@ -96,11 +102,16 @@
                                 <c:out value="${task.owner.username}"/>
                             </td>
                             <td>
-                                <c:out value="${task.status.label}"/>
+                                <c:out value="${task.artStatus.label}"/>
+                            </td>                          
+                            <td>
+                                <c:out value="${task.price}"/>
+                            </td>
+                             <td>
+                                <c:out value="${task.artPrice.label}"/>
                             </td>
                             <td>
-                                <c:out value="${utils.formatDate(task.dueDate)}"/>
-                                <c:out value="${utils.formatTime(task.dueTime)}"/>
+                                <c:out value="${utils.formatDate(task.dueDate)}"/>      
                             </td>
                         </tr>
                     </c:forEach>

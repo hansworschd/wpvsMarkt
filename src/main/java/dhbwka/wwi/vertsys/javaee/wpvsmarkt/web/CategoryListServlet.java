@@ -13,7 +13,7 @@ import dhbwka.wwi.vertsys.javaee.wpvsmarkt.ejb.CategoryBean;
 import dhbwka.wwi.vertsys.javaee.wpvsmarkt.ejb.TaskBean;
 import dhbwka.wwi.vertsys.javaee.wpvsmarkt.ejb.ValidationBean;
 import dhbwka.wwi.vertsys.javaee.wpvsmarkt.jpa.Category;
-import dhbwka.wwi.vertsys.javaee.wpvsmarkt.jpa.Task;
+import dhbwka.wwi.vertsys.javaee.wpvsmarkt.jpa.Article;
 import java.io.IOException;
 import java.util.List;
 import javax.ejb.EJB;
@@ -150,7 +150,7 @@ public class CategoryListServlet extends HttpServlet {
             }
             
             // Bei allen betroffenen Aufgaben, den Bezug zur Kategorie aufheben
-            category.getTasks().forEach((Task task) -> {
+            category.getTasks().forEach((Article task) -> {
                 task.setCategory(null);
                 this.taskBean.update(task);
             });

@@ -14,8 +14,6 @@ import java.sql.Date;
 import java.sql.Time;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
@@ -28,13 +26,13 @@ import javax.validation.constraints.Size;
  * Eine zu erledigende Aufgabe.
  */
 @Entity
-public class Task implements Serializable {
+public class Article implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(generator = "task_ids")
-    @TableGenerator(name = "task_ids", initialValue = 0, allocationSize = 50)
+    @GeneratedValue(generator = "article_ids")
+    @TableGenerator(name = "article_ids", initialValue = 0, allocationSize = 50)
     private long id;
 
     @ManyToOne
@@ -44,36 +42,46 @@ public class Task implements Serializable {
     @ManyToOne
     private Category category;
 
+    @Column(name="art")
+    private ArtStatus artStatus;
+    
     @Column(length = 50)
-    @NotNull(message = "Die Bezeichnung darf nicht leer sein.")
-    @Size(min = 1, max = 50, message = "Die Bezeichnung muss zwischen ein und 50 Zeichen lang sein.")
-    private String shortText;
+    @NotNull(message = "Der Titel darf nicht leer sein.")
+    @Size(min = 1, max = 50, message = "Der Titel muss zwischen ein und 50 Zeichen lang sein.")
+    private String title;
 
     @Lob
     @NotNull
     private String longText;
 
+    @Column
     @NotNull(message = "Das Datum darf nicht leer sein.")
     private Date dueDate;
 
+    @Column
     @NotNull(message = "Die Uhrzeit darf nicht leer sein.")
     private Time dueTime;
-
-    @Enumerated(EnumType.STRING)
-    @NotNull
-    private TaskStatus status = TaskStatus.OPEN;
-
+    
+    @Column
+    @NotNull(message="Preis nicht leer")
+    private String price;
+    
+    @Column
+    private ArtPrice artPrice;
+    
     //<editor-fold defaultstate="collapsed" desc="Konstruktoren">
-    public Task() {
+    public Article() {
     }
 
-    public Task(User owner, Category category, String shortText, String longText, Date dueDate, Time dueTime) {
+    public Article(long id, User owner, Category category, String title, String longText, Date dueDate, Time dueTime, String price) {
+        this.id = id;
         this.owner = owner;
         this.category = category;
-        this.shortText = shortText;
+        this.title = title;
         this.longText = longText;
         this.dueDate = dueDate;
         this.dueTime = dueTime;
+        this.price = price;
     }
     //</editor-fold>
 
@@ -102,14 +110,6 @@ public class Task implements Serializable {
         this.category = category;
     }
 
-    public String getShortText() {
-        return shortText;
-    }
-
-    public void setShortText(String shortText) {
-        this.shortText = shortText;
-    }
-
     public String getLongText() {
         return longText;
     }
@@ -133,14 +133,41 @@ public class Task implements Serializable {
     public void setDueTime(Time dueTime) {
         this.dueTime = dueTime;
     }
-
-    public TaskStatus getStatus() {
-        return status;
+    
+     public ArtStatus getArtStatus() {
+        return artStatus;
     }
 
-    public void setStatus(TaskStatus status) {
-        this.status = status;
+    public void setArtStatus(ArtStatus artStatus) {
+        this.artStatus = artStatus;
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+    
+     public void setPrice(String price) {
+        this.price = price;
+    }
+    
+     public ArtPrice getArtPrice() {
+        return artPrice;
+    }
+
+    public void setArtPrice(ArtPrice artPrice) {
+        this.artPrice = artPrice;
+    }
+     
     //</editor-fold>
+
+    
 
 }

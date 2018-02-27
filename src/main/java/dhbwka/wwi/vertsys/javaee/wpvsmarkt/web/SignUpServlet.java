@@ -59,9 +59,15 @@ public class SignUpServlet extends HttpServlet {
         String username = request.getParameter("signup_username");
         String password1 = request.getParameter("signup_password1");
         String password2 = request.getParameter("signup_password2");
+        String name = request.getParameter("signup_name");
+        String street = request.getParameter("signup_street");
+        String plz = request.getParameter("signup_plz");
+        String place = request.getParameter("signup_place");
+        String phone = request.getParameter("signup_phone");
+        String mail = request.getParameter("signup_mail");
         
         // Eingaben prüfen
-        User user = new User(username, password1);
+        User user = new User(username, password1,name,street,plz,place,phone,mail);
         List<String> errors = this.validationBean.validate(user);
         this.validationBean.validate(user.getPassword(), errors);
         
@@ -72,7 +78,7 @@ public class SignUpServlet extends HttpServlet {
         // Neuen Benutzer anlegen
         if (errors.isEmpty()) {
             try {
-                this.userBean.signup(username, password1);
+                this.userBean.signup(username, password1,name,street,plz,place,phone,mail);
             } catch (UserBean.UserAlreadyExistsException ex) {
                 errors.add(ex.getMessage());
             }
@@ -82,7 +88,7 @@ public class SignUpServlet extends HttpServlet {
         if (errors.isEmpty()) {
             // Keine Fehler: Startseite aufrufen
             request.login(username, password1);
-            response.sendRedirect(WebUtils.appUrl(request, "/app/tasks/"));
+            response.sendRedirect(WebUtils.appUrl(request, "/app/articles/"));
         } else {
             // Fehler: Formuler erneut anzeigen
             FormValues formValues = new FormValues();

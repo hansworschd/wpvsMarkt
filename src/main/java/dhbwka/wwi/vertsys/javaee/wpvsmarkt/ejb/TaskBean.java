@@ -10,8 +10,8 @@
 package dhbwka.wwi.vertsys.javaee.wpvsmarkt.ejb;
 
 import dhbwka.wwi.vertsys.javaee.wpvsmarkt.jpa.Category;
-import dhbwka.wwi.vertsys.javaee.wpvsmarkt.jpa.Task;
-import dhbwka.wwi.vertsys.javaee.wpvsmarkt.jpa.TaskStatus;
+import dhbwka.wwi.vertsys.javaee.wpvsmarkt.jpa.Article;
+import dhbwka.wwi.vertsys.javaee.wpvsmarkt.jpa.ArtStatus;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
@@ -24,10 +24,10 @@ import javax.persistence.criteria.Root;
  */
 @Stateless
 @RolesAllowed("wpvsmarkt-app-user")
-public class TaskBean extends EntityBean<Task, Long> { 
+public class TaskBean extends EntityBean<Article, Long> { 
    
     public TaskBean() {
-        super(Task.class);
+        super(Article.class);
     }
     
     /**
@@ -35,7 +35,7 @@ public class TaskBean extends EntityBean<Task, Long> {
      * @param username Benutzername
      * @return Alle Aufgaben des Benutzers
      */
-    public List<Task> findByUsername(String username) {
+    public List<Article> findByUsername(String username) {
         return em.createQuery("SELECT t FROM Task t WHERE t.owner.username = :username ORDER BY t.dueDate, t.dueTime")
                  .setParameter("username", username)
                  .getResultList();
@@ -52,13 +52,13 @@ public class TaskBean extends EntityBean<Task, Long> {
      * @param status Status (optional)
      * @return Liste mit den gefundenen Aufgaben
      */
-    public List<Task> search(String search, Category category, TaskStatus status) {
+    public List<Article> search(String search, Category category, ArtStatus status) {
         // Hilfsobjekt zum Bauen des Query
         CriteriaBuilder cb = this.em.getCriteriaBuilder();
         
         // SELECT t FROM Task t
-        CriteriaQuery<Task> query = cb.createQuery(Task.class);
-        Root<Task> from = query.from(Task.class);
+        CriteriaQuery<Article> query = cb.createQuery(Article.class);
+        Root<Article> from = query.from(Article.class);
         query.select(from);
 
         // ORDER BY dueDate, dueTime
@@ -66,7 +66,7 @@ public class TaskBean extends EntityBean<Task, Long> {
         
         // WHERE t.shortText LIKE :search
         if (search != null && !search.trim().isEmpty()) {
-            query.where(cb.like(from.get("shortText"), "%" + search + "%"));
+            query.where(cb.like(from.get("title"), "%" + search + "%"));
         }
         
         // WHERE t.category = :category
@@ -76,7 +76,7 @@ public class TaskBean extends EntityBean<Task, Long> {
         
         // WHERE t.status = :status
         if (status != null) {
-            query.where(cb.equal(from.get("status"), status));
+            query.where(cb.equal(from.get("artStatus"), status));
         }
         
         return em.createQuery(query).getResultList();
