@@ -57,7 +57,10 @@ public class UserEditServlet extends HttpServlet {
         
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/app/user_edit.jsp");
 
+        //Aktuellen User laden
         User user = this.userBean.getCurrentUser();
+        
+        //Aktuellen User in Form laden
         request.setAttribute("edit_form", this.createEditForm(user));
         
         dispatcher.forward(request, response);
@@ -107,6 +110,7 @@ public class UserEditServlet extends HttpServlet {
 
         User user = this.userBean.getCurrentUser();
         
+        //Prüfen ob Mail leer ist
         if (mail != null) {
             user.setMail(mail);
         } else {

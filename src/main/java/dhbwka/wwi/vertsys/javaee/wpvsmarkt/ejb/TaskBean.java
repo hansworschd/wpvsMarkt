@@ -74,7 +74,7 @@ public class TaskBean extends EntityBean<Article, Long> {
             query.where(cb.equal(from.get("category"), category));
         }
         
-        // WHERE t.status = :status
+        // WHERE t.artStatus = :status
         if (status != null) {
             query.where(cb.equal(from.get("artStatus"), status));
         }

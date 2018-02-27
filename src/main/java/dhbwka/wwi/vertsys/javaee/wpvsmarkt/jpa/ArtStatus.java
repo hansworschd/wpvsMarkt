@@ -1,5 +1,5 @@
 /*
- * Copyright © 2018 Dennis Schulmeister-Zimolong
+ * Copyright © 2018 Lukas Ewald
  * 
  * E-Mail: dhbw@windows3.de
  * Webseite: https://www.wpvs.de/
@@ -10,7 +10,7 @@
 package dhbwka.wwi.vertsys.javaee.wpvsmarkt.jpa;
 
 /**
- * Statuswerte einer Aufgabe.
+ * Statuswerte eines Arikels.
  */
 public enum ArtStatus {
     SUCHE, BIETE;

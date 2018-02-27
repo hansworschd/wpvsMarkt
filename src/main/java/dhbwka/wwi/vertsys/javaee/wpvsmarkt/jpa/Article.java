@@ -1,5 +1,5 @@
 /*
- * Copyright © 2018 Dennis Schulmeister-Zimolong
+ * Copyright © 2018 Lukas Ewald
  * 
  * E-Mail: dhbw@windows3.de
  * Webseite: https://www.wpvs.de/
@@ -23,7 +23,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- * Eine zu erledigende Aufgabe.
+ * Ein Artikel aus dem kleinanzeigensystem
  */
 @Entity
 public class Article implements Serializable {

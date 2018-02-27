@@ -36,7 +36,7 @@
             <%-- Titelzeile --%>
             <div id="titlebar">
                 <div class="appname">
-                    Markplatz
+                    Marktplatz
                 </div>
                 <div class="content">
                     ${title}

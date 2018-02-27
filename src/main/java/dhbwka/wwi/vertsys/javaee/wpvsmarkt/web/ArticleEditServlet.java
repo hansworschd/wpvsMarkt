@@ -57,17 +57,16 @@ public class ArticleEditServlet extends HttpServlet {
         // Verfügbare Kategorien und Stati für die Suchfelder ermitteln
         request.setAttribute("categories", this.categoryBean.findAllSorted());
         request.setAttribute("statuses", ArtStatus.values());
+        
+        //Arten der Preise holen
         request.setAttribute("artPrices", ArtPrice.values());
         
-       
-        
-       
-
         // Zu bearbeitende Aufgabe einlesen
         HttpSession session = request.getSession();
 
         Article article = this.getRequestedArticle(request);
         
+        //Prüfen ob User gleich ist
         String articleUser = article.getOwner().getUsername();
         String currentUser = userBean.getCurrentUser().getUsername();
         
@@ -75,22 +74,16 @@ public class ArticleEditServlet extends HttpServlet {
         if(articleUser == currentUser){
             readonly = false;
         }
-        
         request.setAttribute("readonly",readonly);
-        request.setAttribute("articleUser",articleUser);
-        request.setAttribute("currentUser",currentUser);
-         
-        request.setAttribute("article_username",article.getOwner().getUsername());
+        
+        request.setAttribute("article_username",article.getOwner().getUsername()); //username vom Article
         
         request.setAttribute("article", article.getId() != 0);
         
-        request.setAttribute("edit",article.getId() != 0);
-        
-        request.setAttribute("same_user", 1);
+        request.setAttribute("edit",article.getId() != 0); //Prüfen ob es ein neuer odere zu editierender Artikel ist
         
         request.setAttribute("article_complete_user",article.getOwner());
-       
-                                
+                            
         if (session.getAttribute("article_form") == null) {
             // Keine Formulardaten mit fehlerhaften Daten in der Session,
             // daher Formulardaten aus dem Datenbankobjekt übernehmen
@@ -162,20 +155,21 @@ public class ArticleEditServlet extends HttpServlet {
             }
         }
        
-       
+       //ArtPreis holen
         try {
             article.setArtPrice(ArtPrice.valueOf(article_artPrice));
         } catch (IllegalArgumentException ex) {
             errors.add("Der ausgewählte ArtPreis ist nicht vorhanden.");
         }
       
-
+        //ArtStatus holen
         try {
             article.setArtStatus(ArtStatus.valueOf(articleStatus));
         } catch (IllegalArgumentException ex) {
             errors.add("Der ausgewählte Status ist nicht vorhanden.");
         }
         
+        //Prüfen ob User gleich ist
         if(!userBean.getCurrentUser().getUsername().equals(article_username)){
             errors.add("Man kann nur eigene Artikel bearbeiten.");
         }
@@ -231,6 +225,7 @@ public class ArticleEditServlet extends HttpServlet {
         // Datensatz löschen
         Article article = this.getRequestedArticle(request);
         
+        //Prüfen ob User gleich ist
         if(!userBean.getCurrentUser().getUsername().equals(article.getOwner().getUsername())){
             errors.add("Man kann nur eigene Artikel löschen.");
         }
