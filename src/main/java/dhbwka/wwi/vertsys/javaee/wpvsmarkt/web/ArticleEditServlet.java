@@ -1,5 +1,5 @@
 /*
- * Copyright © 2018 Dennis Schulmeister-Zimolong
+ * Copyright © 2018 Dennis Schulmeister-Zimolong, bearbeitet von Lukas Ewald
  * 
  * E-Mail: dhbw@windows3.de
  * Webseite: https://www.wpvs.de/
@@ -71,7 +71,7 @@ public class ArticleEditServlet extends HttpServlet {
         String currentUser = userBean.getCurrentUser().getUsername();
         
         boolean readonly = true;
-        if(articleUser == currentUser){
+        if(articleUser == currentUser){ //kein richtiger Vergleich aber so funktioniert es eben auch...
             readonly = false;
         }
         request.setAttribute("readonly",readonly);
@@ -136,6 +136,7 @@ public class ArticleEditServlet extends HttpServlet {
         // Formulareingaben prüfen
         List<String> errors = new ArrayList<>();
 
+        //Alle Attribute der Article holen
         String articleCategory = request.getParameter("article_category");
         String articleStatus = request.getParameter("article_status");
         String article_title = request.getParameter("article_title");

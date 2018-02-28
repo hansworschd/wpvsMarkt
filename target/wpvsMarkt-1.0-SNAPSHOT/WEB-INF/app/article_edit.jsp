@@ -15,6 +15,7 @@
 
 <template:base>
     <jsp:attribute name="title">
+        Artikel editieren
     </jsp:attribute>
 
     <jsp:attribute name="head">
@@ -23,14 +24,14 @@
 
     <jsp:attribute name="menu">
         <div class="menuitem">
-            <a href="<c:url value="/app/articles/"/>">Artikelliste</a>
+            <a href="<c:url value="/app/articles/"/>">Artikelliste &#128458;</a>
         </div>
     </jsp:attribute>
         
        
 
     <jsp:attribute name="content">
-        <form method="post" class="stacked">
+        <form method="post" class="stacked myForm">
             <div class="column">
                 <%-- CSRF-Token --%>
                 <input type="hidden" name="csrf_token" value="${csrf_token}">
@@ -53,7 +54,6 @@
                 
                 <label for="article_status">
                     Art des Angebots:
-                    <span class="required">*</span>
                 </label>
                 <div class="side-by-side margin">
                     <select name="article_status" ${readonly ? 'disabled="true"' : ''}>
@@ -70,28 +70,21 @@
                     <span class="required">*</span>
                 </label>
                 <div class="side-by-side">
-                    <input ${readonly ? 'disabled="true"' : ''} type="text" name="article_title" value="${article_form.values["article_title"][0]}">
+                    <input placeholder="Mein Titel" ${readonly ? 'disabled="true"' : ''} type="text" name="article_title" value="${article_form.values["article_title"][0]}">
                 </div>
                 
                 <label for="article_long_text">
                     Beschreibung
                 </label>
                 <div class="side-by-side">
-                    <textarea ${readonly ? 'disabled="true"' : ''} name="article_long_text"><c:out value="${article_form.values['article_long_text'][0]}"/></textarea>
-                </div>
-
-                <label for="article_price">
-                    Preis
-                    <span class="required">*</span>
-                </label>
-                <div class="side-by-side">
-                    <input ${readonly ? 'disabled="true"' : ''} type="text" name="article_price" value="${article_form.values["article_price"][0]}">
+                    <textarea placeholder="Das Produkt ist x Breit und y hoch. Ein echtes Muss!" ${readonly ? 'disabled="true"' : ''} name="article_long_text"><c:out value="${article_form.values['article_long_text'][0]}"/></textarea>
                 </div>
                 
-                <label for="article_artPrice">
-                    Preis Art
+                <label>
+                    Preis
                 </label>
                 <div class="side-by-side margin">
+                    <input placeholder="123.45" ${readonly ? 'disabled="true"' : ''} type="text" name="article_price" value="${article_form.values["article_price"][0]}">
                     <select name="article_artPrice" ${readonly ? 'disabled="true"' : ''}>
                         <c:forEach items="${artPrices}" var="artPrice">
                             
@@ -102,14 +95,16 @@
                     </select>
                 </div>
 
-                Datum: ${article_form.values["article_due_date"][0]}<br>
-                
-                Verkäufer:<br>
-                ${article_complete_user.name}<br>
-                ${article_complete_user.street} <br>
-                ${article_complete_user.plz} ${article_complete_user.place}<br>
-                ${article_complete_user.phone}<br>
-                ${article_complete_user.mail}
+                        <div id="myInfoDiv">
+                            <strong>Eingestellt am:</strong> ${article_form.values["article_due_date"][0]}<br>
+                            <br> <strong>Verkäufer</strong><br>
+                            ${article_complete_user.name}<br>
+                            ${article_complete_user.street} <br>
+                            ${article_complete_user.plz} ${article_complete_user.place}<br>
+                            ${article_complete_user.phone}<br>
+                            ${article_complete_user.mail}            
+                        </div>
+               
                 
 
                 <%-- Button zum Abschicken --%>

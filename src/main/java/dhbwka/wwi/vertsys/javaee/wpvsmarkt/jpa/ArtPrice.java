@@ -25,7 +25,7 @@ public enum ArtPrice {
             case VHB:
                 return "VHB";
             case FEST:
-                return "fest";
+                return "Festpreis";
             default:
                 return this.toString();
         }

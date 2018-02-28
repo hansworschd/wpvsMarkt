@@ -15,6 +15,7 @@
 
 <template:base>
     <jsp:attribute name="title">
+        User editieren
     </jsp:attribute>
 
     <jsp:attribute name="head">
@@ -23,12 +24,12 @@
 
     <jsp:attribute name="menu">
         <div class="menuitem">
-            <a href="<c:url value="/app/articles/"/>">Artikelliste</a>
+            <a href="<c:url value="/app/articles/"/>">Artikelliste &#128458;</a>
         </div>
     </jsp:attribute>
 
     <jsp:attribute name="content">
-        <form method="post" class="stacked">
+        <form method="post" class="stacked myForm">
             <div class="column">
                 <%-- CSRF-Token --%>
                 <input type="hidden" name="csrf_token" value="${csrf_token}">
@@ -38,25 +39,29 @@
                 <div class="side-by-side">
                     <input type="text" name="edit_username" value="${edit_form.values["edit_username"][0]}" readonly="readonly" disabled="true">
                 </div>
+                
+                <label for="edit_mail">E-Mail
+                    <span class="required">*</span>
+                </label>
+                
+                <div class="side-by-side">
+                    <input type="text" name="edit_mail" value="${edit_form.values["edit_mail"][0]}" placeholder="bla@blubb.de">
+                </div>
 
                 <label for="edit_name">Name</label>
                 <div class="side-by-side">
-                    <input type="text" name="edit_name" value="${edit_form.values["edit_name"][0]}" >
+                    <input type="text" name="edit_name" value="${edit_form.values["edit_name"][0]}" placeholder="Vorname Nachname">
                 </div>
                 
                 <label for="edit_street">Strasse</label>
                 <div class="side-by-side">
-                    <input type="text" name="edit_street" value="${edit_form.values["edit_street"][0]}">
+                    <input type="text" name="edit_street" value="${edit_form.values["edit_street"][0]}" placeholder="Meine Str. 10">
                 </div>
 
-                <label for="edit_plz">PLZ</label>
+                <label for="edit_plz">PLZ und Ort</label>
                 <div class="side-by-side">
-                    <input type="text" name="edit_plz" value="${edit_form.values["edit_plz"][0]}">
-                </div>
-                
-                 <label for="edit_place">Ort</label>
-                <div class="side-by-side">
-                    <input type="text" name="edit_place" value="${edit_form.values["edit_place"][0]}">
+                    <input type="text" name="edit_plz" value="${edit_form.values["edit_plz"][0]}" placeholder="12345">
+                    <input type="text" name="edit_place" value="${edit_form.values["edit_place"][0]}" placeholder="Mannheim">
                 </div>
                 
                  <label for="edit_phone">Telefon</label>
@@ -64,10 +69,7 @@
                     <input type="text" name="edit_phone" value="${edit_form.values["edit_phone"][0]}" >
                 </div>
                 
-                 <label for="edit_mail">E-Mail</label>
-                <div class="side-by-side">
-                    <input type="text" name="edit_mail" value="${edit_form.values["edit_mail"][0]}">
-                </div>
+                
                 
                 <%-- Button zum Abschicken --%>
                 <div class="side-by-side">

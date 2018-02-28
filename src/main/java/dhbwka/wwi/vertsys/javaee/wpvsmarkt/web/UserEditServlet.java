@@ -1,6 +1,6 @@
 /*
- * Copyright © 2018 Dennis Schulmeister-Zimolong
- * 
+ * Copyright © 2018 Lukas Ewald
+
  * E-Mail: dhbw@windows3.de
  * Webseite: https://www.wpvs.de/
  * 
@@ -13,12 +13,8 @@ import dhbwka.wwi.vertsys.javaee.wpvsmarkt.ejb.CategoryBean;
 import dhbwka.wwi.vertsys.javaee.wpvsmarkt.ejb.TaskBean;
 import dhbwka.wwi.vertsys.javaee.wpvsmarkt.ejb.UserBean;
 import dhbwka.wwi.vertsys.javaee.wpvsmarkt.ejb.ValidationBean;
-import dhbwka.wwi.vertsys.javaee.wpvsmarkt.jpa.Article;
-import dhbwka.wwi.vertsys.javaee.wpvsmarkt.jpa.ArtStatus;
 import dhbwka.wwi.vertsys.javaee.wpvsmarkt.jpa.User;
 import java.io.IOException;
-import java.sql.Date;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -99,7 +95,6 @@ public class UserEditServlet extends HttpServlet {
 
         // Formulareingaben prüfen
         List<String> errors = new ArrayList<>();
-
        
         String name = request.getParameter("edit_name");
         String plz = request.getParameter("edit_plz");
@@ -117,7 +112,6 @@ public class UserEditServlet extends HttpServlet {
             errors.add("Die Mail darf nicht leer sein");
         }
 
-       
         user.setName(name);
         user.setStreet(street);
         user.setPlace(place);

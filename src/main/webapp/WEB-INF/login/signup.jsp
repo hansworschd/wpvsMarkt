@@ -43,7 +43,7 @@
                         <span class="required">*</span>
                     </label>
                     <div class="side-by-side">
-                        <input type="text" name="signup_username" value="${signup_form.values["signup_username"][0]}">
+                        <input type="text" placeholder="Hansi94" name="signup_username" value="${signup_form.values["signup_username"][0]}">
                     </div>
 
                     <label for="signup_password1">
@@ -62,48 +62,45 @@
                         <input type="password" name="signup_password2" value="${signup_form.values["signup_password2"][0]}">
                     </div>
                     
-                    <label for="signup_name">
-                        Name (Vorname + Nachname)
+                     <label for="signup_mail">
+                        E-Mail
+                        <span class="required">*</span>
                     </label>
                     <div class="side-by-side">
-                        <input type="text" name="signup_name" value="${signup_form.values["signup_name"][0]}">
+                        <input placeholder="bla@blub.de" type="text" name="signup_mail" value="${signup_form.values["signup_mail"][0]}">
+                    </div>
+                    
+                    <label for="signup_name">
+                        Name
+                    </label>
+                    <div class="side-by-side">
+                        <input placeholder="Harald Maier" type="text" name="signup_name" value="${signup_form.values["signup_name"][0]}">
                     </div>
                     
                     <label for="signup_street">
                         Strasse
                     </label>
                     <div class="side-by-side">
-                        <input type="text" name="signup_street" value="${signup_form.values["signup_street"][0]}">
+                        <input placeholder="Meine Strasse 12" type="text" name="signup_street" value="${signup_form.values["signup_street"][0]}">
                     </div>
                     
                      <label for="signup_plz">
-                        PLZ
+                        Anschrift
                     </label>
                     <div class="side-by-side">
-                        <input type="text" name="signup_plz" value="${signup_form.values["signup_plz"][0]}">
-                    </div>
-                    
-                    <label for="signup_place">
-                        Ort
-                    </label>
-                    <div class="side-by-side">
-                        <input type="text" name="signup_place" value="${signup_form.values["signup_place"][0]}">
+                        <input placeholder="12345" type="text" name="signup_plz" value="${signup_form.values["signup_plz"][0]}">
+                        <input placeholder="Mannheim" type="text" name="signup_place" value="${signup_form.values["signup_place"][0]}">
+                 
                     </div>
                     
                     <label for="signup_phone">
                         Telefon
                     </label>
                     <div class="side-by-side">
-                        <input type="text" name="signup_phone" value="${signup_form.values["signup_phone"][0]}">
+                        <input placeholder="+49 1234 56789" type="text" name="signup_phone" value="${signup_form.values["signup_phone"][0]}">
                     </div>
                     
-                    <label for="signup_mail">
-                        E-Mail
-                        <span class="required">*</span>
-                    </label>
-                    <div class="side-by-side">
-                        <input type="text" name="signup_mail" value="${signup_form.values["signup_mail"][0]}">
-                    </div>
+                   
 
                     <%-- Button zum Abschicken --%>
                     <div class="side-by-side">

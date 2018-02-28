@@ -1,5 +1,5 @@
 /*
-Copyright © 2018 Dennis Schulmeister-Zimolong
+Copyright © 2018 Dennis Schulmeister-Zimolong editiert von Lukas Ewald
 
 E-Mail: dhbw@windows3.de
 Webseite: https://www.wpvs.de/
@@ -26,7 +26,7 @@ html {
     color: rgb(83, 91, 94);
 
     background-image: url(../img/bg.jpg);
-    background-repeat: no-repeat;
+    background-repeat: repeat-y;
     background-position: center center;
     background-size: cover;
 
@@ -42,7 +42,7 @@ html {
 }
 
 header {
-    background: white;
+ background: #FCFCFC;  
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
     margin-bottom: 1rem;
     position: sticky;
@@ -73,8 +73,14 @@ header, main {
     color: rgb(83, 149, 176);
 }
 
+
 /* Menüzeile */
+#menubar{
+    
+}
+
 #menubar .menuitem {
+    
     display: inline-block;
     padding-right: 2em;
     padding-bottom: 0.5em;
@@ -88,4 +94,21 @@ a, a:visited {
 
 a:hover {
     text-decoration: underline;
+}
+
+
+/* Informationen über Verkäufer */
+#myInfoDiv{
+    background-color: #FEFEFE;
+    margin-top: 15px;
+    font-size: 10pt;
+}
+
+button{
+    padding: 5px;
+    margin-top: 5px;
+}
+
+table tr td{
+    padding-right:10px;
 }
